@@ -16,7 +16,7 @@ import { config } from "./config";
       type: config.Db.type as "postgres",
       ssl: true,
       synchronize: true,
-      url: config.Db.link,
+      url: config.Db.link ? config.Db.link : process.env.DB_LINK,
       entities: [UserEntity, PostEntity, CommentEntity],
     }),
     UsersModule,
