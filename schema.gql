@@ -1,0 +1,98 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  creation_Data: Float!
+  update_Data: Float!
+  author: User!
+  comments: [Comment!]!
+}
+
+type Comment {
+  id: Int!
+  title: String!
+  body: String!
+  isPositive: Boolean!
+  creation_Date: DateTime!
+  author: User!
+  post: Post!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""user"""
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  creation_Date: Float!
+  comments: [Comment!]!
+  posts: [Post!]!
+}
+
+type Query {
+  getUsers(skip: Int! = 0, take: Int! = 25): [User!]!
+  myData: User!
+  getPostById(id: Float!): Post!
+  getPosts(skip: Int! = 0, take: Int! = 25): [Post!]!
+  getCommentById(id: Float!): Comment!
+  getComments(skip: Int! = 0, take: Int! = 25): [Comment!]!
+}
+
+type Mutation {
+  login(data: LoginUserInput!): User!
+  logout: User!
+  register(data: RegisterUserInput!): User!
+  modifyUser(data: UserModifyInput!): User!
+  changeUserPassword(oldPassword: String!, newPassword: String!): User!
+  createPost(data: PostCreateInput!): Post!
+  deletePost(id: Float!): Post!
+  modifyPost(id: Float!, data: PostModifyInput!): Post!
+  createComment(postId: Float!, data: CommentCreateInput!): Comment!
+  modifyComment(id: Float!, data: CommentModifyInput!): Comment!
+  deleteComment(commentId: Float!): Comment!
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
+}
+
+input RegisterUserInput {
+  username: String!
+  password: String!
+  email: String!
+}
+
+input UserModifyInput {
+  username: String
+  email: String
+}
+
+input PostCreateInput {
+  title: String!
+  body: String!
+}
+
+input PostModifyInput {
+  title: String
+  body: String
+}
+
+input CommentCreateInput {
+  title: String!
+  body: String!
+  isPositive: Boolean!
+}
+
+input CommentModifyInput {
+  title: String
+  body: String
+}
